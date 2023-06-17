@@ -1,4 +1,4 @@
-# DBI202-Labs_and_Assignment
+# DBI202 - Labs and Assignment
 > All source code about DBI202 that I learned at FPT University QN AI Campus.
 
 ![Languages](https://img.shields.io/github/languages/top/hardingadonis/DBI202-Labs_and_Assignment?style=flat)
