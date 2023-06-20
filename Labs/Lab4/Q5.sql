@@ -1,3 +1,9 @@
+/*
+** 5.
+** Please show who currently supervises staff named Mai Duy An.
+** Required information: employee number, and the full name of the supervisor.
+*/
+
 USE FUH_COMPANY
 GO
 

@@ -1,3 +1,9 @@
+/*
+** 6.
+** Indicates where the project named ProjectA is currently working.
+** Required information: code, name of working position.
+*/
+
 USE FUH_COMPANY
 GO
 
