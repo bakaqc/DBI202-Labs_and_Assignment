@@ -6,7 +6,6 @@ place of which projects.
 */
 
 USE FUH_COMPANY
-
 GO 
 
 /*
@@ -17,7 +16,7 @@ SELECT *
 FROM tblLocation
 */
 
-SELECT proNum, proName
+SELECT proNum AS 'Code', proName
 FROM tblProject
 WHERE locNum = (SELECT locNum
 				FROM tblLocation
