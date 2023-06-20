@@ -1,6 +1,10 @@
 USE FUH_COMPANY
 GO 
-
+  
+/*Indicate dependents over 18 years old .T
+  Information required: name, date of birth of dependent, dependent employee name.
+*/
+  
 /*
 SELECT *
 FROM tblDependent
