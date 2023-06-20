@@ -11,5 +11,6 @@
 ## Table of contents:
 - Labs:
   - Lab 4: [Click here!!!](https://github.com/hardingadonis/DBI202-Labs_and_Assignment/blob/main/Labs/Lab4)
+  - Lab 5: [Click here!!!](https://github.com/hardingadonis/DBI202-Labs_and_Assignment/blob/main/Labs/Lab5)
 
 - Assignment: [Click here!!!](https://github.com/hardingadonis/DBI202-Labs_and_Assignment/blob/main/Assignment)
