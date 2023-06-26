@@ -33,3 +33,19 @@ ELSE
 BEGIN
     PRINT 'The Customer table already exists.';
 END
+
+
+-- STEP 4: Create Employee table
+
+
+-- STEP 5: Create Product table
+
+
+-- STEP 6: Create Voucher table
+
+
+-- STEP 7: Create Bill table
+
+
+-- STEP 8: Create Bill_Data table
+
