@@ -71,6 +71,28 @@ END
 -- STEP 7: Create Bill table
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Bill')
 BEGIN
+	CREATE TABLE Bill (
+		Bill_ID			VARCHAR(10)	NOT NULL	PRIMARY KEY,
+
+		Create_Date		DATE		NOT NULL,
+		Create_Time		TIME		NOT NULL,
+
+		Payment_Date	DATE		NOT NULL,
+		Payment_Time	DATE		NOT NULL,
+
+		Primary_Price	INT			NOT NULL,
+		Used_Point		INT			NOT NULL,
+		Final_Price		INT			NOT NULL,
+		Earned_Point	INT			NOT NULL,
+
+		Given_Money		INT			NOT NULL,
+		Excess_Money	INT			NOT NULL,
+
+		Employee_ID		VARCHAR(8)	NOT NULL,
+		Voucher_ID		VARCHAR(5)			,
+		Customer_Phone	VARCHAR(10)
+	);
+
     PRINT 'Bill table created successfully.';
 END
 ELSE
@@ -87,4 +109,15 @@ END
 ELSE
 BEGIN
     PRINT 'The Bill_Data table already exists.';
+END
+
+
+-- STEP 9: Set constraint for Bill table
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Bill')
+BEGIN
+	ALTER TABLE Bill
+	ADD CONSTRAINT DF_Bill_Used_Point DEFAULT 0 FOR Used_Point;
+
+	ALTER TABLE Bill
+	ADD CONSTRAINT DF_Bill_Earned_Point DEFAULT 0 FOR Earned_Point;
 END
