@@ -60,6 +60,16 @@ END
 -- STEP 6: Create Voucher table
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Voucher')
 BEGIN
+	CREATE TABLE Voucher
+	(
+		Voucher_ID VARCHAR(5) PRIMARY KEY, 
+		Voucher_Description NVARCHAR(200) NOT NULL,
+		Discount INT,
+		Minimum_Price INT,
+		Begin_Date DATE,
+		End_Date DATE CHECK(END_DATE >= BEGIN_DATE),
+		Is_Require_Member BIT
+	);
     PRINT 'Voucher table created successfully.';
 END
 ELSE
