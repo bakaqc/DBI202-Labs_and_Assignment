@@ -38,7 +38,13 @@ END
 -- STEP 4: Create Employee table
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Employee')
 BEGIN
-    PRINT 'Employee table created successfully.';
+	CREATE TABLE Employee (
+		Employee_ID			VARCHAR(8)		NOT NULL	 PRIMARY KEY,
+		Employee_Name		NVARCHAR(50)	NOT NULL,
+		Employee_Phone		VARCHAR(10)		NOT NULL,
+		Employee_Address	NVARCHAR(100)
+	);
+	PRINT 'Employee table created successfully.';
 END
 ELSE
 BEGIN
@@ -123,6 +129,12 @@ END
 -- STEP 8: Create Bill_Data table
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Bill_Data')
 BEGIN
+	CREATE TABLE Bill_Data (
+		Bill_ID			VARCHAR(10)		NOT NULL,
+		Product_ID		VARCHAR(5)		NOT NULL,
+		Product_Amount	INT				NOT NULL CHECK (Product_Amount > 0),
+		PRIMARY KEY(Bill_ID, Product_ID)
+	);
     PRINT 'Bill_Data table created successfully.';
 END
 ELSE
