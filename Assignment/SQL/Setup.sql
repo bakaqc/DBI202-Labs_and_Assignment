@@ -23,8 +23,8 @@ GO
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Customer')
 BEGIN
     CREATE TABLE Customer (
-        Customer_Phone VARCHAR(20) PRIMARY KEY,
-        Customer_Name NVARCHAR(100) NOT NULL,
+        Customer_Phone VARCHAR(10) PRIMARY KEY,
+        Customer_Name NVARCHAR(50) NOT NULL,
         Point INT CHECK(Point >= 0) NOT NULL
     );
     PRINT 'Customer table created successfully.';
@@ -42,7 +42,7 @@ END
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Product')
 BEGIN
     CREATE TABLE Product (
-        Product_ID VARCHAR(20) PRIMARY KEY,
+        Product_ID VARCHAR(5) PRIMARY KEY,
         Product_Name NVARCHAR(100) NOT NULL,
         Price INT CHECK(Price > 0) NOT NULL
     );
