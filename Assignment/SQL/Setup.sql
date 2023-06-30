@@ -67,7 +67,7 @@ BEGIN
 		Discount INT,
 		Minimum_Price INT,
 		Begin_Date DATE,
-		End_Date DATE CHECK(END_DATE >= BEGIN_DATE),
+		End_Date DATE,
 		Is_Require_Member BIT
 	);
     PRINT 'Voucher table created successfully.';
