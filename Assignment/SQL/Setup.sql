@@ -158,32 +158,51 @@ GO
 -- STEP 9: Create foreign keys for Bill table
 IF EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Bill')
 BEGIN
-	IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'FK_Employee_ID' AND TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'Bill')
-	BEGIN
-		ALTER TABLE Bill
-		ADD CONSTRAINT FK_Employee_ID
-		FOREIGN KEY (Employee_ID)
-		REFERENCES Employee (Employee_ID);
-		
-		PRINT 'Create foreign key Employee_ID for Bill table.';
+	ALTER TABLE Bill
+	ADD CONSTRAINT FK_Employee_ID
+	FOREIGN KEY (Employee_ID)
+	REFERENCES Employee (Employee_ID);
 
-		--
+	PRINT 'Create foreign key Employee_ID for Bill table.';
+	
+	--
+	
+	ALTER TABLE Bill
+	ADD CONSTRAINT FK_Voucher_ID
+	FOREIGN KEY (Voucher_ID)
+	REFERENCES Voucher (Voucher_ID);
 
-		ALTER TABLE Bill
-		ADD CONSTRAINT FK_Voucher_ID
-		FOREIGN KEY (Voucher_ID)
-		REFERENCES Voucher (Voucher_ID);
+	PRINT 'Create foreign key Voucher_ID for Bill table.';
+	
+	--
+	
+	ALTER TABLE Bill
+	ADD CONSTRAINT FK_Customer_Phone
+	FOREIGN KEY (Customer_Phone)
+	REFERENCES Customer (Customer_Phone);
+	
+	PRINT 'Create foreign key Customer_Phone for Bill table.';
+END
+GO
 
-		PRINT 'Create foreign key Voucher_ID for Bill table.';
 
-		--
-
-		ALTER TABLE Bill
-		ADD CONSTRAINT FK_Customer_Phone
-		FOREIGN KEY (Customer_Phone)
-		REFERENCES Customer (Customer_Phone);
-
-		PRINT 'Create foreign key Customer_Phone for Bill table.';
-	END
+-- STEP 10: Create foreign keys for Bill_Data table
+IF EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Bill_Data')
+BEGIN
+	ALTER TABLE Bill_Data
+	ADD CONSTRAINT FK_Bill_ID
+	FOREIGN KEY (Bill_ID)
+	REFERENCES Bill (Bill_ID);
+	
+	PRINT 'Create foreign key Bill_ID for Bill_Data table.';
+	
+	--
+	
+	ALTER TABLE Bill_Data
+	ADD CONSTRAINT FK_Product_ID
+	FOREIGN KEY (Product_ID)
+	REFERENCES Product (Product_ID);
+	
+	PRINT 'Create foreign key Voucher_ID for Bill_Data table.';
 END
 GO
