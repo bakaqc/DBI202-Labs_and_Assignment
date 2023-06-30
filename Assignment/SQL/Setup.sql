@@ -6,8 +6,7 @@
 
 
 -- STEP 1: Create a PASTRY_SHOP database
---IF DB_ID('PASTRY_SHOP') IS NULL
-IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'PASTRY_SHOP')
+IF DB_ID('PASTRY_SHOP') IS NULL
 BEGIN
     CREATE DATABASE PASTRY_SHOP;
     PRINT 'PASTRY_SHOP database created successfully.';
