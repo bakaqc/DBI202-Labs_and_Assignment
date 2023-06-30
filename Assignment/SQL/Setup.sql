@@ -11,7 +11,7 @@ BEGIN
     CREATE DATABASE PASTRY_SHOP;
     PRINT 'PASTRY_SHOP database created successfully.';
 END
-
+GO
 
 
 -- STEP 2: Use PASTRY_SHOP database
@@ -23,9 +23,9 @@ GO
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Customer')
 BEGIN
     CREATE TABLE Customer (
-        Customer_Phone VARCHAR(10) PRIMARY KEY,
-        Customer_Name NVARCHAR(50) NOT NULL,
-        Point INT CHECK(Point >= 0) NOT NULL
+        Customer_Phone	VARCHAR(10)		PRIMARY KEY,
+        Customer_Name	NVARCHAR(50)	NOT NULL,
+        Point			INT				NOT NULL CHECK(Point >= 0)
     );
     PRINT 'Customer table created successfully.';
 END
@@ -56,9 +56,9 @@ END
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Product')
 BEGIN
     CREATE TABLE Product (
-        Product_ID VARCHAR(5) PRIMARY KEY,
-        Product_Name NVARCHAR(100) NOT NULL,
-        Price INT CHECK(Price > 0) NOT NULL
+        Product_ID		VARCHAR(5)		PRIMARY KEY,
+        Product_Name	NVARCHAR(100)	NOT NULL,
+        Price			INT				NOT NULL CHECK(Price > 0) 
     );
     PRINT 'Product table created successfully.';
 END
