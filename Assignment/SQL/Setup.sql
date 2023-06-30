@@ -23,9 +23,11 @@ GO
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Customer')
 BEGIN
     CREATE TABLE Customer (
-        Customer_Phone	VARCHAR(10)		PRIMARY KEY,
+        Customer_Phone	VARCHAR(10)		NOT NULL,
         Customer_Name	NVARCHAR(50)	NOT NULL,
-        Point			INT				NOT NULL
+        Point			INT				NOT NULL,
+
+		PRIMARY KEY(Customer_Phone)
     );
     PRINT 'Customer table created successfully.';
 END
@@ -39,10 +41,12 @@ END
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Employee')
 BEGIN
 	CREATE TABLE Employee (
-		Employee_ID			VARCHAR(8)		NOT NULL	 PRIMARY KEY,
+		Employee_ID			VARCHAR(8)		NOT NULL,
 		Employee_Name		NVARCHAR(50)	NOT NULL,
 		Employee_Phone		VARCHAR(10)		NOT NULL,
-		Employee_Address	NVARCHAR(100)
+		Employee_Address	NVARCHAR(100),
+
+		PRIMARY KEY(Employee_ID)
 	);
 	PRINT 'Employee table created successfully.';
 END
@@ -56,9 +60,11 @@ END
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Product')
 BEGIN
     CREATE TABLE Product (
-        Product_ID		VARCHAR(5)		PRIMARY KEY,
+        Product_ID		VARCHAR(5)		NOT NULL,
         Product_Name	NVARCHAR(100)	NOT NULL,
-        Price			INT				NOT NULL 
+        Price			INT				NOT NULL,
+
+		PRIMARY KEY(Product_ID)
     );
     PRINT 'Product table created successfully.';
 END
@@ -133,6 +139,7 @@ BEGIN
 		Bill_ID			VARCHAR(10)		NOT NULL,
 		Product_ID		VARCHAR(5)		NOT NULL,
 		Product_Amount	INT				NOT NULL,
+
 		PRIMARY KEY(Bill_ID, Product_ID)
 	);
     PRINT 'Bill_Data table created successfully.';
