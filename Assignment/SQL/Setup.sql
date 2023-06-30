@@ -35,6 +35,7 @@ ELSE
 BEGIN
     PRINT 'The Customer table already exists.';
 END
+GO
 
 
 -- STEP 4: Create Employee table
@@ -54,6 +55,7 @@ ELSE
 BEGIN
     PRINT 'The Employee table already exists.';
 END
+GO
 
 
 -- STEP 5: Create Product table
@@ -72,6 +74,7 @@ ELSE
 BEGIN
     PRINT 'The Product table already exists.';
 END
+GO
 
 
 -- STEP 6: Create Voucher table
@@ -95,6 +98,7 @@ ELSE
 BEGIN
     PRINT 'The Voucher table already exists.';
 END
+GO
 
 
 -- STEP 7: Create Bill table
@@ -123,13 +127,13 @@ BEGIN
 
 		PRIMARY KEY(Bill_ID)
 	);
-
     PRINT 'Bill table created successfully.';
 END
 ELSE
 BEGIN
     PRINT 'The Bill table already exists.';
 END
+GO
 
 
 -- STEP 8: Create Bill_Data table
@@ -148,3 +152,38 @@ ELSE
 BEGIN
     PRINT 'The Bill_Data table already exists.';
 END
+GO
+
+
+-- STEP 9: Create foreign keys for Bill table
+IF EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Bill')
+BEGIN
+	IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'FK_Employee_ID' AND TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'Bill')
+	BEGIN
+		ALTER TABLE Bill
+		ADD CONSTRAINT FK_Employee_ID
+		FOREIGN KEY (Employee_ID)
+		REFERENCES Employee (Employee_ID);
+		
+		PRINT 'Create foreign key Employee_ID for Bill table.';
+
+		--
+
+		ALTER TABLE Bill
+		ADD CONSTRAINT FK_Voucher_ID
+		FOREIGN KEY (Voucher_ID)
+		REFERENCES Voucher (Voucher_ID);
+
+		PRINT 'Create foreign key Voucher_ID for Bill table.';
+
+		--
+
+		ALTER TABLE Bill
+		ADD CONSTRAINT FK_Customer_Phone
+		FOREIGN KEY (Customer_Phone)
+		REFERENCES Customer (Customer_Phone);
+
+		PRINT 'Create foreign key Customer_Phone for Bill table.';
+	END
+END
+GO
