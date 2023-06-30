@@ -22,7 +22,8 @@ GO
 -- STEP 3: Create Customer table
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Customer')
 BEGIN
-    CREATE TABLE Customer (
+    CREATE TABLE Customer
+	(
         Customer_Phone	VARCHAR(10)		NOT NULL,
         Customer_Name	NVARCHAR(50)	NOT NULL,
         Point			INT				NOT NULL,
@@ -41,7 +42,8 @@ GO
 -- STEP 4: Create Employee table
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Employee')
 BEGIN
-	CREATE TABLE Employee (
+	CREATE TABLE Employee
+	(
 		Employee_ID			VARCHAR(8)		NOT NULL,
 		Employee_Name		NVARCHAR(50)	NOT NULL,
 		Employee_Phone		VARCHAR(10)		NOT NULL,
@@ -61,7 +63,8 @@ GO
 -- STEP 5: Create Product table
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Product')
 BEGIN
-    CREATE TABLE Product (
+    CREATE TABLE Product
+	(
         Product_ID		VARCHAR(5)		NOT NULL,
         Product_Name	NVARCHAR(100)	NOT NULL,
         Price			INT				NOT NULL,
@@ -104,7 +107,8 @@ GO
 -- STEP 7: Create Bill table
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Bill')
 BEGIN
-	CREATE TABLE Bill (
+	CREATE TABLE Bill
+	(
 		Bill_ID			VARCHAR(10)	NOT NULL,
 
 		Create_Date		DATE		NOT NULL,
@@ -139,7 +143,8 @@ GO
 -- STEP 8: Create Bill_Data table
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Bill_Data')
 BEGIN
-	CREATE TABLE Bill_Data (
+	CREATE TABLE Bill_Data
+	(
 		Bill_ID			VARCHAR(10)		NOT NULL,
 		Product_ID		VARCHAR(5)		NOT NULL,
 		Product_Amount	INT				NOT NULL,
