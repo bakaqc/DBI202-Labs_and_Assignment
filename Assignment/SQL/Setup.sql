@@ -6,7 +6,8 @@
 
 
 -- STEP 1: Create a PASTRY_SHOP database
-IF DB_ID('PASTRY_SHOP') IS NULL
+--IF DB_ID('PASTRY_SHOP') IS NULL
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'PASTRY_SHOP')
 BEGIN
     CREATE DATABASE PASTRY_SHOP;
     PRINT 'PASTRY_SHOP database created successfully.';
@@ -82,7 +83,7 @@ END
 IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Bill')
 BEGIN
 	CREATE TABLE Bill (
-		Bill_ID			VARCHAR(10)	NOT NULL	PRIMARY KEY,
+		Bill_ID			VARCHAR(10)	NOT NULL,
 
 		Create_Date		DATE		NOT NULL,
 		Create_Time		TIME		NOT NULL,
@@ -99,8 +100,10 @@ BEGIN
 		Excess_Money	INT			NOT NULL,
 
 		Employee_ID		VARCHAR(8)	NOT NULL,
-		Voucher_ID		VARCHAR(5)			,
-		Customer_Phone	VARCHAR(10)
+		Voucher_ID		VARCHAR(5),
+		Customer_Phone	VARCHAR(10),
+
+		PRIMARY KEY(Bill_ID)
 	);
 
     PRINT 'Bill table created successfully.';
@@ -119,15 +122,4 @@ END
 ELSE
 BEGIN
     PRINT 'The Bill_Data table already exists.';
-END
-
-
--- STEP 9: Set constraint for Bill table
-IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Bill')
-BEGIN
-	ALTER TABLE Bill
-	ADD CONSTRAINT DF_Bill_Used_Point DEFAULT 0 FOR Used_Point;
-
-	ALTER TABLE Bill
-	ADD CONSTRAINT DF_Bill_Earned_Point DEFAULT 0 FOR Earned_Point;
 END
