@@ -24,8 +24,8 @@ IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Customer')
 BEGIN
     CREATE TABLE Customer (
         Customer_Phone VARCHAR(20) PRIMARY KEY,
-        Customer_Name NVARCHAR(100),
-        Point INT
+        Customer_Name NVARCHAR(100) NOT NULL,
+        Point INT CHECK(Point >= 0) NOT NULL
     );
     PRINT 'Customer table created successfully.';
 END
@@ -39,6 +39,19 @@ END
 
 
 -- STEP 5: Create Product table
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Product')
+BEGIN
+    CREATE TABLE Product (
+        Product_ID VARCHAR(20) PRIMARY KEY,
+        Product_Name NVARCHAR(100) NOT NULL,
+        Price INT CHECK(Price > 0) NOT NULL
+    );
+    PRINT 'Product table created successfully.';
+END
+ELSE
+BEGIN
+    PRINT 'The Product table already exists.';
+END
 
 
 -- STEP 6: Create Voucher table
