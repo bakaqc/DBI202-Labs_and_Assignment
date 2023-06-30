@@ -25,7 +25,7 @@ BEGIN
     CREATE TABLE Customer (
         Customer_Phone	VARCHAR(10)		PRIMARY KEY,
         Customer_Name	NVARCHAR(50)	NOT NULL,
-        Point			INT				NOT NULL CHECK(Point >= 0)
+        Point			INT				NOT NULL
     );
     PRINT 'Customer table created successfully.';
 END
@@ -58,7 +58,7 @@ BEGIN
     CREATE TABLE Product (
         Product_ID		VARCHAR(5)		PRIMARY KEY,
         Product_Name	NVARCHAR(100)	NOT NULL,
-        Price			INT				NOT NULL CHECK(Price > 0) 
+        Price			INT				NOT NULL 
     );
     PRINT 'Product table created successfully.';
 END
@@ -132,7 +132,7 @@ BEGIN
 	CREATE TABLE Bill_Data (
 		Bill_ID			VARCHAR(10)		NOT NULL,
 		Product_ID		VARCHAR(5)		NOT NULL,
-		Product_Amount	INT				NOT NULL CHECK (Product_Amount > 0),
+		Product_Amount	INT				NOT NULL,
 		PRIMARY KEY(Bill_ID, Product_ID)
 	);
     PRINT 'Bill_Data table created successfully.';
