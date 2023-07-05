@@ -14,3 +14,9 @@
   - Lab 5: [Click here!!!](https://github.com/hardingadonis/DBI202-Labs_and_Assignment/blob/main/Labs/Lab5)
 
 - Assignment: [Click here!!!](https://github.com/hardingadonis/DBI202-Labs_and_Assignment/blob/main/Assignment)
+
+## Contributors:
+
+<a href="https://github.com/hardingadonis/DBI202-Labs_and_Assignment/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=hardingadonis/DBI202-Labs_and_Assignment" />
+</a>

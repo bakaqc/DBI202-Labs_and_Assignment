@@ -9,11 +9,9 @@ department
 USE FUH_COMPANY
 GO 
 
--- Show table Project
 SELECT *
 FROM tblProject
 
--- Show table Department
 SELECT *
 FROM tblDepartment
 

@@ -9,7 +9,6 @@ Mai Duy An
 USE FUH_COMPANY
 GO 
 
--- Show bảng Employee
 SELECT *
 FROM tblEmployee
 
