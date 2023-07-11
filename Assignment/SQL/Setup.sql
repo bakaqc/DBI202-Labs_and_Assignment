@@ -1,4 +1,4 @@
---------------------------------------------------------
+﻿--------------------------------------------------------
 --                                                    --
 -- Create a database, tables and insert data for them --
 --                                                    --
@@ -137,3 +137,83 @@ ADD CONSTRAINT FK_Product_ID
 FOREIGN KEY (Product_ID)
 REFERENCES Product (Product_ID);
 GO
+
+-- STEP 11: Trigger for Customer table
+-- Assign: Nghĩa
+-- Format: SĐT 10 số
+-- VD: 03xxxxxxxx
+
+
+
+-- STEP 12: Trigger for Employee table
+-- Assign: Thúy
+-- Format: EMPQN001, EMPQN002, EMPQN003,...
+
+
+
+-- STEP 13: Trigger for Product table
+-- Assign: Nghĩa
+-- Format: PD001, PD002, PD003,...
+
+
+
+-- STEP 14: Trigger for Voucher table
+-- Assign: Chương
+-- Format: VC001, VC002, VC003,...
+
+
+
+-- STEP 15: Trigger for Bill table
+-- Assign: Vương
+-- Format: BILL000001, BILL000002, BILL000003,...
+
+
+
+-- STEP 16: Trigger for Bill_Data table
+-- Assign: Thúy
+-- Format:
+-- - BILL000001, BILL000002, BILL000003,...
+-- - PD001, PD002, PD003,...
+
+
+
+------------------------------------------------------------
+
+
+
+-- STEP 17: Insert data for Customer table
+-- Assign: Nghĩa
+-- Format: SĐT 10 số
+-- VD: 03xxxxxxxx
+
+
+
+-- STEP 18: Insert data for Employee table
+-- Assign: Thúy
+-- Format: EMPQN001, EMPQN002, EMPQN003,...
+
+
+
+-- STEP 19: Insert data for Product table
+-- Assign: Nghĩa
+-- Format: PD001, PD002, PD003,...
+
+
+
+-- STEP 20: Insert data for Voucher table
+-- Assign: Chương
+-- Format: VC001, VC002, VC003,...
+
+
+
+-- STEP 15: Insert data for Bill table
+-- Assign: Vương
+-- Format: BILL000001, BILL000002, BILL000003,...
+
+
+
+-- STEP 16: Insert data for Bill_Data table
+-- Assign: Thúy
+-- Format:
+-- - BILL000001, BILL000002, BILL000003,...
+-- - PD001, PD002, PD003,...
