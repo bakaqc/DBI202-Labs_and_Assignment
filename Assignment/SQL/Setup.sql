@@ -232,12 +232,18 @@ GO
 -- Assign: Nghĩa
 -- Format: SĐT 10 số
 -- VD: 03xxxxxxxx
-INSERT INTO Customer
-VALUES ('0987654321',N'Đinh Quốc Chương',123),
-       ('0123456789',N'Lê Minh Vương',456),
-	   ('0918273645',N'Nguyễn Thị Thúy',789),
-	   ('0864291735',N'Hồ Trọng Nghĩa',161),
-	   ('0946132857',N'Trịnh Mình Dương',562);
+INSERT INTO Customer (Customer_Phone, Customer_Name, Point)
+VALUES
+('0934567890',	N'Nguyễn Thị Hương',	8),
+('0978012345',	N'Lê Văn Tuấn',			7),
+('0912345678',	N'Trần Thị Lan Anh',	9),
+('0987654321',	N'Phạm Minh Đức',		23),
+('0905123456',	N'Hoàng Thị Thu Hà',	67),
+('0967890123',	N'Vũ Minh Hưng',		98),
+('0943210987',	N'Đặng Thanh Trúc',		34),
+('0923456789',	N'Bùi Xuân Nam',		3),
+('0956789012',	N'Ngô Thị Hồng Nhung',	4),
+('0987654321',	N'Đỗ Quang Trung',		127);
 
 
 -- STEP 18: Insert data for Employee table
@@ -249,30 +255,30 @@ VALUES ('0987654321',N'Đinh Quốc Chương',123),
 -- STEP 19: Insert data for Product table
 -- Assign: Nghĩa
 -- Format: PD001, PD002, PD003,...
-INSERT INTO Product
-VALUES ('PD001', N'Bánh ít lá gai', 5000),
-       ('PD002', N'Bánh gấu', 12000),
-	   ('PD003', N'Bánh mì', 3000),
-	   ('PD004', N'Bánh kem', 100000),
-	   ('PD005', N'Bánh mì nhân thịt', 10000);
+INSERT INTO Product (Product_ID, Product_Name, Price)
+VALUES
+('PD001',	N'Bánh macaron',				25000),
+('PD002',	N'Bánh tiramisu',				35000),
+('PD003',	N'Bánh mousse socola',			30000),
+('PD004',	N'Bánh red velvet',				40000),
+('PD005',	N'Bánh cupcake',				20000),
+('PD006',	N'Bánh bông lan trứng muối',	15000),
+('PD007',	N'Bánh cheesecake',				50000),
+('PD008',	N'Bánh tart trái cây',			45000),
+('PD009',	N'Bánh cookie socola',			10000),
+('PD010',	N'Bánh hạnh nhân caramel',		10000);
 
 
 -- STEP 20: Insert data for Voucher table
 -- Assign: Chương
 -- Format: VC001, VC002, VC003,...
-INSERT INTO Voucher 
-(Voucher_ID, Voucher_Description, Discount, Minimum_Price, Begin_Date, End_Date, Is_Require_Member)
+INSERT INTO Voucher (Voucher_ID, Voucher_Description, Discount, Minimum_Price, Begin_Date, End_Date, Is_Require_Member)
 VALUES
-('VC001',	 '',	10,		200000	,	'2023-7-1' ,	'2023-7-10',	0),
-('VC002',	 '',	15,		300000	,	'2023-7-1' ,	'2023-7-15',	1),
-('VC003',	 '',	20,		400000	,	'2023-7-1' ,	'2023-7-20',	1),
-('VC004',	 '',	10,		200000	,	'2023-7-1' ,	'2023-7-25',	1),
-('VC005',	 '',	5 ,		100000	,	'2023-7-1' ,	'2023-7-30',	1),
-('VC006',	 '',	15,		300000	,	'2023-7-5' ,	'2023-7-20',	1),
-('VC007',	 '',	10,		200000	,	'2023-7-10',	'2023-7-30',	1),
-('VC008',	 '',	25,		500000	,	'2023-7-15',	'2023-7-20',	1),
-('VC009',	 '',	30,		1000000	,	'2023-7-20',	'2023-7-30',	1),
-('VC010',	 '',	10,		200000	,	'2023-7-5' ,	'2023-8-5' ,	1);
+('VC001',	N'Mừng ngày khai trương, giảm 5% cho hóa đơn từ 0 đồng',	5,	0,		'2023-06-01',	'2023-06-10',	0),
+('VC002',	N'Mừng ngày khai trương, giảm 10% cho hóa đơn từ 0 đồng',	10,	0,		'2023-06-01',	'2023-06-10',	1),
+('VC003',	N'Mừng hè, giảm 10% cho hóa đơn từ 100000 đồng',			10,	100000,	'2023-06-11',	'2023-08-32',	1),
+('VC004',	N'Mừng hè, giảm 15% cho hóa đơn từ 200000 đồng',			15,	200000,	'2023-06-11',	'2023-08-32',	1),
+('VC005',	N'Mừng hè, giảm 20% cho hóa đơn từ 500000 đồng',			20,	500000,	'2023-06-11',	'2023-08-32',	1),
 GO
 
 -- STEP 15: Insert data for Bill table
