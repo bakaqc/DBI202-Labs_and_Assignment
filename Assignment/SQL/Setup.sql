@@ -172,7 +172,7 @@ BEGIN
 	IF EXISTS (	SELECT 1
 			   	FROM Inserted
                	WHERE Employee_ID NOT LIKE 'EMPQN[0-9][0-9][0-9]'
-			   		OR Employee_Phone NOT LIKE '03[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+			   		OR Employee_Phone NOT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
 			  )
     BEGIN
         PRINT ('Error! Insertion canceled!');
@@ -229,7 +229,22 @@ GO
 -- STEP 15: Trigger for Bill table
 -- Assign: Vương
 -- Format: BILL000001, BILL000002, BILL000003,...
-
+CREATE TRIGGER CheckBillOnInsert
+ON Bill
+FOR INSERT
+AS
+BEGIN
+	IF EXISTS (	SELECT 1
+				FROM Inserted
+				WHERE Bill_ID NOT LIKE 'BILL[0-9][0-9][0-9][0-9][0-9][0-9]'
+					OR Employee_ID NOT LIKE 'EMPQN[0-9][0-9][0-9]'
+			  )
+	BEGIN
+		PRINT ('Error! Insertion canceled!')
+		ROLLBACK TRANSACTION
+	END
+END
+GO
 
 
 -- STEP 16: Trigger for Bill_Data table
@@ -243,9 +258,10 @@ FOR INSERT
 AS
 BEGIN
 	-- Trong IF là các điều kiện kiểm tra các thuộc tính trong bảng
-	IF EXISTS (SELECT 1
-			   FROM Inserted
-               WHERE Product_Amount < 0)
+	IF EXISTS (	SELECT 1
+			   	FROM Inserted
+               	WHERE Product_Amount <= 0
+			  )
     BEGIN
         PRINT ('Error! Insertion canceled!');
         ROLLBACK TRANSACTION;
@@ -319,7 +335,39 @@ GO
 -- STEP 15: Insert data for Bill table
 -- Assign: Vương
 -- Format: BILL000001, BILL000002, BILL000003,...
-
+INSERT INTO Bill (Bill_ID, Create_Date, Create_Time, Employee_ID, Customer_Phone)
+VALUES
+('BILL000001', '2023-06-01', '08:10:10', 'EMPQN001', NULL),
+('BILL000002', '2023-06-01', '10:00:03', 'EMPQN001', '0934567890'),
+('BILL000003', '2023-06-08', '15:00:14', 'EMPQN002', '0923456789'),
+('BILL000004', '2023-06-08', '15:17:00', 'EMPQN002', '0984321765'),
+('BILL000005', '2023-06-11', '10:17:00', 'EMPQN003', NULL),
+('BILL000006', '2023-06-11', '12:47:00', 'EMPQN004', '0912345678'),
+('BILL000007', '2023-06-12', '13:45:00', 'EMPQN004', NULL),
+('BILL000008', '2023-06-19', '11:54:00', 'EMPQN002', '0978012345'),
+('BILL000009', '2023-07-01', '12:19:00', 'EMPQN001', '0978012345'),
+('BILL000010', '2023-07-01', '08:02:00', 'EMPQN004', '0956789012'),
+('BILL000011', '2023-07-02', '09:30:00', 'EMPQN003', '0943210987'),
+('BILL000012', '2023-07-05', '14:20:00', 'EMPQN001', NULL),
+('BILL000013', '2023-07-07', '16:45:00', 'EMPQN004', '0987654321'),
+('BILL000014', '2023-07-10', '11:10:00', 'EMPQN002', '0905123456'),
+('BILL000015', '2023-07-12', '18:30:00', 'EMPQN003', NULL),
+('BILL000016', '2023-07-15', '10:05:00', 'EMPQN001', '0967890123'),
+('BILL000017', '2023-07-15', '15:40:00', 'EMPQN004', '0978012345'),
+('BILL000018', '2023-07-16', '13:20:00', 'EMPQN002', '0984321765'),
+('BILL000019', '2023-07-16', '17:55:00', 'EMPQN001', NULL),
+('BILL000020', '2023-07-16', '19:45:00', 'EMPQN003', '0912345678'),
+('BILL000021', '2023-07-17', '09:15:00', 'EMPQN004', NULL),
+('BILL000022', '2023-07-18', '12:30:00', 'EMPQN001', '0934567890'),
+('BILL000023', '2023-07-19', '14:45:00', 'EMPQN003', '0923456789'),
+('BILL000024', '2023-07-20', '16:20:00', 'EMPQN002', '0984321765'),
+('BILL000025', '2023-07-21', '11:05:00', 'EMPQN004', NULL),
+('BILL000026', '2023-07-22', '13:40:00', 'EMPQN001', '0912345678'),
+('BILL000027', '2023-07-23', '15:25:00', 'EMPQN003', '0943210987'),
+('BILL000028', '2023-07-24', '10:50:00', 'EMPQN002', '0956789012'),
+('BILL000029', '2023-07-25', '17:15:00', 'EMPQN001', '0978012345'),
+('BILL000030', '2023-07-26', '19:00:00', 'EMPQN004', NULL)
+GO
 
 
 -- STEP 16: Insert data for Bill_Data table
