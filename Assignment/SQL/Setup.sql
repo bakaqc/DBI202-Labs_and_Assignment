@@ -6,7 +6,7 @@
 
 
 -- STEP 1: Create a PASTRY_SHOP database
-CREATE DATABASE PASTRY_SHOP;
+CREATE DATABASE PASTRY_SHOP
 GO
 
 
@@ -23,7 +23,7 @@ CREATE TABLE Customer
 	Point			INT				NOT NULL,
 	
 	PRIMARY KEY (Customer_Phone)
-);
+)
 GO
 
 
@@ -36,7 +36,7 @@ CREATE TABLE Employee
 	Employee_Address	NVARCHAR(100),
 	
 	PRIMARY KEY (Employee_ID)
-);
+)
 GO
 
 
@@ -48,7 +48,7 @@ CREATE TABLE Product
 	Price			INT				NOT NULL,
 	
 	PRIMARY KEY (Product_ID)
-);
+)
 GO
 
 
@@ -64,7 +64,7 @@ CREATE TABLE Voucher
 	Is_Require_Member		BIT				NOT NULL,
 	
 	PRIMARY KEY (Voucher_ID)
-);
+)
 GO
 
 
@@ -92,7 +92,7 @@ CREATE TABLE Bill
 	Customer_Phone		VARCHAR(10),
 	
 	PRIMARY KEY (Bill_ID)
-);
+)
 GO
 
 
@@ -104,7 +104,7 @@ CREATE TABLE Bill_Data
 	Product_Amount	INT				NOT NULL,
 	
 	PRIMARY KEY (Bill_ID, Product_ID)
-);
+)
 GO
 
 
@@ -153,8 +153,8 @@ BEGIN
 			   OR Point < 0
 			   )
     BEGIN
-        PRINT ('Error! Insertion canceled!');
-        ROLLBACK TRANSACTION;
+        PRINT ('Error! Insertion canceled!')
+        ROLLBACK TRANSACTION
     END
 END
 Go
@@ -180,7 +180,7 @@ BEGIN
 					OR Price <= 0
 			  )
     BEGIN
-        PRINT ('Error! Insertion canceled!');
+        PRINT ('Error! Insertion canceled!')
         ROLLBACK TRANSACTION;
     END
 END
@@ -203,8 +203,8 @@ BEGIN
 					OR Discount <= 0
 			  )
     BEGIN
-        PRINT ('Error! Insertion canceled!');
-        ROLLBACK TRANSACTION;
+        PRINT ('Error! Insertion canceled!')
+        ROLLBACK TRANSACTION
     END
 END
 GO
@@ -243,7 +243,8 @@ VALUES
 ('0943210987',	N'Đặng Thanh Trúc',		34),
 ('0923456789',	N'Bùi Xuân Nam',		3),
 ('0956789012',	N'Ngô Thị Hồng Nhung',	4),
-('0987654321',	N'Đỗ Quang Trung',		127);
+('0984321765',	N'Đỗ Quang Trung',		127)
+GO
 
 
 -- STEP 18: Insert data for Employee table
@@ -266,7 +267,8 @@ VALUES
 ('PD007',	N'Bánh cheesecake',				50000),
 ('PD008',	N'Bánh tart trái cây',			45000),
 ('PD009',	N'Bánh cookie socola',			10000),
-('PD010',	N'Bánh hạnh nhân caramel',		10000);
+('PD010',	N'Bánh hạnh nhân caramel',		10000)
+GO
 
 
 -- STEP 20: Insert data for Voucher table
@@ -276,9 +278,9 @@ INSERT INTO Voucher (Voucher_ID, Voucher_Description, Discount, Minimum_Price, B
 VALUES
 ('VC001',	N'Mừng ngày khai trương, giảm 5% cho hóa đơn từ 0 đồng',	5,	0,		'2023-06-01',	'2023-06-10',	0),
 ('VC002',	N'Mừng ngày khai trương, giảm 10% cho hóa đơn từ 0 đồng',	10,	0,		'2023-06-01',	'2023-06-10',	1),
-('VC003',	N'Mừng hè, giảm 10% cho hóa đơn từ 100000 đồng',			10,	100000,	'2023-06-11',	'2023-08-32',	1),
-('VC004',	N'Mừng hè, giảm 15% cho hóa đơn từ 200000 đồng',			15,	200000,	'2023-06-11',	'2023-08-32',	1),
-('VC005',	N'Mừng hè, giảm 20% cho hóa đơn từ 500000 đồng',			20,	500000,	'2023-06-11',	'2023-08-32',	1),
+('VC003',	N'Mừng hè, giảm 10% cho hóa đơn từ 100000 đồng',			10,	100000,	'2023-06-11',	'2023-08-31',	1),
+('VC004',	N'Mừng hè, giảm 15% cho hóa đơn từ 200000 đồng',			15,	200000,	'2023-06-11',	'2023-08-31',	1),
+('VC005',	N'Mừng hè, giảm 20% cho hóa đơn từ 500000 đồng',			20,	500000,	'2023-06-11',	'2023-08-31',	1)
 GO
 
 -- STEP 15: Insert data for Bill table
