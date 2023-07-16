@@ -76,7 +76,6 @@ CREATE TABLE Bill
 	Create_Date			DATE			NOT NULL,
 	Create_Time			TIME			NOT NULL,
 	
-	Payment_Time		TIME			NOT NULL,
 	Payment_Date		DATE,
 	Payment_Time		TIME,
 	
@@ -150,12 +149,15 @@ AS
 BEGIN
     IF EXISTS (SELECT 1
 			   FROM Inserted
-               WHERE Customer_Phone NOT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' OR Point < 0)
+               WHERE Customer_Phone NOT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+			   OR Point < 0
+			   )
     BEGIN
-        PRINT ('Phone number must have 10 digits, not contain letters and Point > 0');
+        PRINT ('Error! Insertion canceled!');
         ROLLBACK TRANSACTION;
     END
-END;
+END
+Go
 
 
 -- STEP 12: Trigger for Employee table
@@ -172,14 +174,17 @@ ON Product
 AFTER INSERT
 AS
 BEGIN
-    IF EXISTS (SELECT 1
-			   FROM Inserted
-               WHERE Product_ID NOT LIKE 'PD[0-9][0-9][0-9]' OR Price <= 0)
+    IF EXISTS (	SELECT 1
+				FROM Inserted
+        		WHERE Product_ID NOT LIKE 'PD[0-9][0-9][0-9]'
+					OR Price <= 0
+			  )
     BEGIN
         PRINT ('Error! Insertion canceled!');
         ROLLBACK TRANSACTION;
     END
-END;
+END
+GO
 
 
 -- STEP 14: Trigger for Voucher table
@@ -190,17 +195,19 @@ ON Voucher
 FOR INSERT
 AS
 BEGIN
-	IF EXISTS (SELECT 1
-			   FROM Inserted
-               WHERE Voucher_ID NOT LIKE 'VC[0-9][0-9][0-9]'
+	IF EXISTS (	SELECT 1
+			   	FROM Inserted
+               	WHERE Voucher_ID NOT LIKE 'VC[0-9][0-9][0-9]'
 					OR (Begin_Date >= End_Date)
 					OR Minimum_Price < 0
-					OR Discount <= 0)
+					OR Discount <= 0
+			  )
     BEGIN
         PRINT ('Error! Insertion canceled!');
         ROLLBACK TRANSACTION;
     END
 END
+GO
 
 
 -- STEP 15: Trigger for Bill table
