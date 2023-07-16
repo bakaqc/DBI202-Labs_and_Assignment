@@ -76,16 +76,17 @@ CREATE TABLE Bill
 	Create_Date			DATE			NOT NULL,
 	Create_Time			TIME			NOT NULL,
 	
-	Payment_Date		DATE			NOT NULL,
 	Payment_Time		TIME			NOT NULL,
+	Payment_Date		DATE,
+	Payment_Time		TIME,
 	
-	Primary_Price		INT				NOT NULL,
-	Used_Point			INT				NOT NULL,
-	Final_Price			INT				NOT NULL,
-	Earned_Point		INT				NOT NULL,
+	Primary_Price		INT,
+	Used_Point			INT,
+	Final_Price			INT,
+	Earned_Point		INT,
 	
-	Given_Money			INT				NOT NULL,
-	Excess_Money		INT				NOT NULL,
+	Given_Money			INT,
+	Excess_Money		INT,
 	
 	Employee_ID			VARCHAR(8)		NOT NULL,
 	Voucher_ID			VARCHAR(5),
