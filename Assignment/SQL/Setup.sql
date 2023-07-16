@@ -163,17 +163,17 @@ Go
 -- STEP 12: Trigger for Employee table
 -- Assign: Thúy
 -- Format: EMPQN001, EMPQN002, EMPQN003,...
-
 CREATE TRIGGER CheckEmployeeOnInsert
 ON Employee
 FOR INSERT
 AS
 BEGIN
 	-- Trong IF là các điều kiện kiểm tra các thuộc tính trong bảng
-	IF EXISTS (SELECT 1
-			   FROM Inserted
-               WHERE Employee_ID NOT LIKE 'EMPQN[0-9][0-9][0-9]'
-			   OR Employee_Phone NOT LIKE '03[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+	IF EXISTS (	SELECT 1
+			   	FROM Inserted
+               	WHERE Employee_ID NOT LIKE 'EMPQN[0-9][0-9][0-9]'
+			   		OR Employee_Phone NOT LIKE '03[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+			  )
     BEGIN
         PRINT ('Error! Insertion canceled!');
         ROLLBACK TRANSACTION;
@@ -181,12 +181,13 @@ BEGIN
 END
 GO
 
+
 -- STEP 13: Trigger for Product table
 -- Assign: Nghĩa
 -- Format: PD001, PD002, PD003,...
 CREATE TRIGGER CheckProductOnInsert
 ON Product
-AFTER INSERT
+FOR INSERT
 AS
 BEGIN
     IF EXISTS (	SELECT 1
@@ -276,13 +277,12 @@ GO
 -- STEP 18: Insert data for Employee table
 -- Assign: Thúy
 -- Format: EMPQN001, EMPQN002, EMPQN003,...
-INSERT INTO Employee
-		(Employee_ID, Employee_Name, Employee_Phone, Employee_Address)
+INSERT INTO Employee (Employee_ID, Employee_Name, Employee_Phone, Employee_Address)
 VALUES
-		('EMPQN001', N'Đinh Quốc Chương', '0366640761', N'Tây Sơn'),
-		('EMPQN002', N'Lê Minh Vương', '0366640762', N'Xuân Diệu'),
-		('EMPQN003', N'Hồ Trọng Nghĩa', '0366640763', N'Nguyễn Thái Học'),
-		('EMPQN004', N'Trịnh Minh Dương', '0366640764', N'Nguyễn Huệ');
+('EMPQN001',	N'Đinh Quốc Chương',	'0376166640',	N'An Nhơn'),
+('EMPQN002',	N'Lê Minh Vương',		'0367626640',	N'Tây Sơn'),
+('EMPQN003',	N'Hồ Trọng Nghĩa',		'0307636664',	N'An Nhơn'),
+('EMPQN004',	N'Nguyễn Thị Thúy',		'0376464660',	N'Tây Sơn')
 GO
 
 
