@@ -160,7 +160,22 @@ GO
 -- STEP 14: Trigger for Voucher table
 -- Assign: Chương
 -- Format: VC001, VC002, VC003,...
-
+CREATE TRIGGER CheckVoucherOnInsert
+ON Voucher
+FOR INSERT
+AS
+BEGIN
+	IF EXISTS (SELECT 1
+			   FROM Inserted
+               WHERE Voucher_ID NOT LIKE 'VC[0-9][0-9][0-9]'
+					OR (Begin_Date >= End_Date)
+					OR Minimum_Price < 0
+					OR Discount <= 0)
+    BEGIN
+        PRINT ('Error! Insertion canceled!');
+        ROLLBACK TRANSACTION;
+    END
+END
 
 
 -- STEP 15: Trigger for Bill table
@@ -203,8 +218,20 @@ GO
 -- STEP 20: Insert data for Voucher table
 -- Assign: Chương
 -- Format: VC001, VC002, VC003,...
-
-
+INSERT INTO Voucher 
+(Voucher_ID, Voucher_Description, Discount, Minimum_Price, Begin_Date, End_Date, Is_Require_Member)
+VALUES
+('VC001',	 '',	10,		200000	,	'2023-7-1' ,	'2023-7-10',	0),
+('VC002',	 '',	15,		300000	,	'2023-7-1' ,	'2023-7-15',	1),
+('VC003',	 '',	20,		400000	,	'2023-7-1' ,	'2023-7-20',	1),
+('VC004',	 '',	10,		200000	,	'2023-7-1' ,	'2023-7-25',	1),
+('VC005',	 '',	5 ,		100000	,	'2023-7-1' ,	'2023-7-30',	1),
+('VC006',	 '',	15,		300000	,	'2023-7-5' ,	'2023-7-20',	1),
+('VC007',	 '',	10,		200000	,	'2023-7-10',	'2023-7-30',	1),
+('VC008',	 '',	25,		500000	,	'2023-7-15',	'2023-7-20',	1),
+('VC009',	 '',	30,		1000000	,	'2023-7-20',	'2023-7-30',	1),
+('VC010',	 '',	10,		200000	,	'2023-7-5' ,	'2023-8-5' ,	1);
+GO
 
 -- STEP 15: Insert data for Bill table
 -- Assign: Vương
