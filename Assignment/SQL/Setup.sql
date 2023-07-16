@@ -142,7 +142,19 @@ GO
 -- Assign: Nghĩa
 -- Format: SĐT 10 số
 -- VD: 03xxxxxxxx
-
+CREATE TRIGGER CheckCustomerOnInsert
+ON Customer
+AFTER INSERT
+AS
+BEGIN
+    IF EXISTS (SELECT 1
+			   FROM Inserted
+               WHERE Customer_Phone NOT LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]' OR Point < 0)
+    BEGIN
+        PRINT ('Phone number must have 10 digits, not contain letters and Point > 0');
+        ROLLBACK TRANSACTION;
+    END
+END;
 
 
 -- STEP 12: Trigger for Employee table
@@ -154,7 +166,19 @@ GO
 -- STEP 13: Trigger for Product table
 -- Assign: Nghĩa
 -- Format: PD001, PD002, PD003,...
-
+CREATE TRIGGER CheckProductOnInsert
+ON Product
+AFTER INSERT
+AS
+BEGIN
+    IF EXISTS (SELECT 1
+			   FROM Inserted
+               WHERE Product_ID NOT LIKE 'PD[0-9][0-9][0-9]' OR Price <= 0)
+    BEGIN
+        PRINT ('Error! Insertion canceled!');
+        ROLLBACK TRANSACTION;
+    END
+END;
 
 
 -- STEP 14: Trigger for Voucher table
@@ -185,7 +209,12 @@ GO
 -- Assign: Nghĩa
 -- Format: SĐT 10 số
 -- VD: 03xxxxxxxx
-
+INSERT INTO Customer
+VALUES ('0987654321',N'Đinh Quốc Chương',123),
+       ('0123456789',N'Lê Minh Vương',456),
+	   ('0918273645',N'Nguyễn Thị Thúy',789),
+	   ('0864291735',N'Hồ Trọng Nghĩa',161),
+	   ('0946132857',N'Trịnh Mình Dương',562);
 
 
 -- STEP 18: Insert data for Employee table
@@ -197,7 +226,12 @@ GO
 -- STEP 19: Insert data for Product table
 -- Assign: Nghĩa
 -- Format: PD001, PD002, PD003,...
-
+INSERT INTO Product
+VALUES ('PD001', N'Bánh ít lá gai', 5000),
+       ('PD002', N'Bánh gấu', 12000),
+	   ('PD003', N'Bánh mì', 3000),
+	   ('PD004', N'Bánh kem', 100000),
+	   ('PD005', N'Bánh mì nhân thịt', 10000);
 
 
 -- STEP 20: Insert data for Voucher table
