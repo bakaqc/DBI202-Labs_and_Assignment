@@ -455,3 +455,23 @@ VALUES
 ('BILL000030', 'PD005', 7),
 ('BILL000030', 'PD010', 4)
 GO
+
+
+-- STEP 17: Create procedure for Customer table
+CREATE PROCEDURE Update_Point_For_Customer(@Customer_Phone VARCHAR(10), @Used_Point INT, @Earned_Point INT)
+AS
+BEGIN
+	DECLARE @Point INT = 0
+
+	SELECT 	@Point = c.Point
+	FROM	Customer c
+	WHERE	c.Customer_Phone = @Customer_Phone
+
+	SET @Point = @Point - @Used_Point + @Earned_Point
+
+	UPDATE	Customer
+	SET		Point = @Point
+	WHERE	Customer_Phone = @Customer_Phone
+END
+GO
+GO
