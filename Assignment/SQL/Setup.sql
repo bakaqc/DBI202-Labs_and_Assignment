@@ -555,4 +555,48 @@ END
 GO
 
 
+-- STEP 19: Create procedure for payment
+CREATE PROCEDURE Pay(@Bill_ID VARCHAR(10), @Given_Money INT)
+AS
+BEGIN
+	DECLARE @Final_Price	INT	= 0
+	DECLARE @Excess_Money	INT	= 0
+
+
+	-- Get @Final_Price with @Bill_ID
+	SELECT	@Final_Price = b.Final_Price
+	FROM	Bill b
+	WHERE	b.Bill_ID = @Bill_ID
+
+
+	-- Calculate Bill with @Bill_ID if @Final_Price is null
+	IF @Final_Price IS NULL
+	BEGIN
+		EXEC Calculate_Bill @Bill_ID
+
+		SELECT	@Final_Price = b.Final_Price
+		FROM	Bill b
+		WHERE	b.Bill_ID = @Bill_ID
+	END
+
+	IF @Final_Price > @Given_Money
+	BEGIN
+		PRINT ('Error! Given_Money must be greather or equals to Final_Price!')
+		RETURN
+	END
+
+
+	-- Calculate @Excess_Money
+	SET @Excess_Money = @Given_Money - @Final_Price
+
+
+	-- Update Bill with @Bill_ID
+	UPDATE	Bill
+	SET		Payment_Date	= CAST(GETDATE() AS DATE),
+			Payment_Time	= CAST(GETDATE() AS TIME),
+			Given_Money		= @Given_Money,
+			Excess_Money	= @Excess_Money
+	
+	WHERE	Bill_ID			= @Bill_ID
+END
 GO
