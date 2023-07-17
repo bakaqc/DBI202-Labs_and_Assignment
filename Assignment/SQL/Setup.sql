@@ -474,4 +474,85 @@ BEGIN
 	WHERE	Customer_Phone = @Customer_Phone
 END
 GO
+
+
+-- STEP 18: Create procedure for Bill table
+CREATE PROCEDURE Calculate_Bill(@Bill_ID VARCHAR(10))
+AS
+BEGIN
+	-- Declare variables
+	DECLARE @Primary_Price	INT			= 0
+	DECLARE @Used_Point		INT			= 0
+	DECLARE @Customer_Phone	VARCHAR(10)	= NULL
+	DECLARE @Create_Date	DATE		= NULL
+	DECLARE @Voucher_ID		VARCHAR(5)	= NULL
+	DECLARE @Discount		INT			= 0
+	DECLARE @Final_Price	INT			= 0
+	DECLARE @Earned_Point	INT			= 0
+
+
+	-- Get @Primary_Price with @Bill_ID
+	SELECT		@Primary_Price 	= SUM(db.Product_Amount * p.Price)
+	FROM		Bill_Data db JOIN Product p ON db.Product_ID = p.Product_ID
+	GROUP BY	db.Bill_ID
+	HAVING		db.Bill_ID 		= @Bill_ID
+
+
+	-- Get @Used_Point, @Customer_Phone, @Create_Date with @Bill_ID
+	SELECT 		@Used_Point		= ISNULL(c.Point, 0),
+				@Customer_Phone	= b.Customer_Phone,
+				@Create_Date	= b.Create_Date
+
+	FROM 		Bill b LEFT JOIN Customer c ON b.Customer_Phone = c.Customer_Phone
+	WHERE 		b.Bill_ID 		= @Bill_ID
+
+	IF @Used_Point > 50
+		SET @Used_Point = 50
+	
+
+	-- Get @Voucher_ID, @Discount, @Create_Date available
+	SELECT TOP 1
+				@Voucher_ID = v.Voucher_ID,
+				@Discount = v.Discount
+
+	FROM Voucher v
+	WHERE		(v.Begin_Date <= @Create_Date AND @Create_Date <= v.End_Date) AND
+				((@Primary_Price - @Used_Point * 1000) >= v.Minimum_Price) AND
+				(v.Is_Require_Member = CASE WHEN @Customer_Phone IS NULL THEN 0 ELSE 1 END)
+
+	ORDER BY v.Discount DESC
+	
+	
+	-- Calculate @Final_Price
+	SET @Final_Price = ((@Primary_Price - @Used_Point * 1000) * (100 - @Discount)) / 100
+	
+
+	-- Calculate @Earned_Point
+	SET @Earned_Point = @Final_Price / 20000
+	
+	
+	-- Update Point for Customer
+	IF @Customer_Phone IS NOT NULL
+	BEGIN
+		SET @Earned_Point = @Final_Price / 20000
+
+		EXEC Update_Point_For_Customer @Customer_Phone, @Used_Point, @Earned_Point
+	END
+	ELSE
+		SET @Earned_Point = 0
+
+
+	-- Update Bill with @Bill_ID
+	UPDATE	Bill
+	SET		Primary_Price	= @Primary_Price,
+			Used_Point		= @Used_Point,
+			Final_Price		= @Final_Price,
+			Earned_Point	= @Earned_Point,
+			Voucher_ID		= @Voucher_ID
+
+	WHERE	Bill_ID = @Bill_ID
+END
+GO
+
+
 GO
