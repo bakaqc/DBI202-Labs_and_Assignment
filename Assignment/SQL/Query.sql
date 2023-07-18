@@ -18,6 +18,12 @@ GO
 -- Câu 3:
 -- - Hiển thị số lần được áp dụng của các voucher
 -- - Vương
+SELECT      v.Voucher_ID AS [Voucher ID],
+            COUNT(*) AS [Total times applied]
+
+FROM        Voucher v LEFT JOIN Bill b ON v.Voucher_ID = b.Voucher_ID
+GROUP BY    v.Voucher_ID
+ORDER BY    [Total times applied] DESC
 
 -- Câu 4:
 -- - Hiển thị danh sách hóa đơn của nhân viên Nguyễn Thị Thúy
@@ -26,6 +32,13 @@ GO
 -- Câu 5:
 -- - Hiển thị tổng doanh thu của mỗi tháng
 -- - Vương
+SELECT      YEAR(b.Create_Date) AS [Year],
+            MONTH(b.Create_Date) AS [Month],
+            SUM(b.Final_Price) AS [Total revenue]
+            
+FROM        Bill b
+GROUP BY    YEAR(b.Create_Date),
+            MONTH(b.Create_Date)
 
 -- Câu 6:
 -- - Hiển thị sản phẩm best seller của tháng 7
