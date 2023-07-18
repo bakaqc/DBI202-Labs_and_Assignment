@@ -509,6 +509,9 @@ BEGIN
 	IF @Used_Point > 50
 		SET @Used_Point = 50
 	
+	IF @Primary_Price - @Used_Point * 1000 <= 0
+		SET @Used_Point = @Primary_Price / 1000
+	
 
 	-- Get @Voucher_ID, @Discount, @Create_Date available
 	SELECT TOP 1
