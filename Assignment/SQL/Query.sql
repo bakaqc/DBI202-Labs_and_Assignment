@@ -39,7 +39,7 @@ GO
 	GROUP BY p.Product_Name
 	*/
 
-	SELECT TOP 1 p.Product_Name, SUM(bd.Product_Amount) AS Total_sold
+	SELECT TOP 1 WITH TIES p.Product_Name, SUM(bd.Product_Amount) AS Total_sold
 	FROM Bill_Data AS bd
 		JOIN Product p ON bd.Product_ID = p.Product_ID
 		JOIN Bill b ON bd.Bill_ID = b.Bill_ID
@@ -49,25 +49,21 @@ GO
 
 -- Câu 7:
 -- - Hiển thị khách hàng thành viên có hóa đơn mua lớn nhất trong tháng 6 và thông tin hóa đơn đó
+-- - Thông tin hoá đơn cần hiển thị: Mã hoá đơn, số tiền khách đã chi trả
 -- - Thúy
 
-/*	SELECT		 c.Customer_Name, 
-				 b.Bill_ID, b.Create_Date, b. Create_Time, b.Payment_Date, b.Payment_Time, 
-				 b.Primary_Price, b.Used_Point, b.Final_Price, b.Earned_Point, b.Given_Money,
-				 b.Excess_Money, b.Employee_ID, b.Voucher_ID, b.Customer_Phone
+/*	SELECT c.Customer_Name, b.Bill_ID, b.Final_Price
 	FROM Customer c
 		JOIN Bill b ON c.Customer_Phone = b.Customer_Phone
 	WHERE MONTH(b.Create_Date) = 6
+	ORDER BY b.Final_Price DESC;
 	*/
 
-	SELECT TOP 1 c.Customer_Name, 
-				 b.Bill_ID, b.Create_Date, b. Create_Time, b.Payment_Date, b.Payment_Time, 
-				 b.Primary_Price, b.Used_Point, b.Final_Price, b.Earned_Point, b.Given_Money,
-				 b.Excess_Money, b.Employee_ID, b.Voucher_ID, b.Customer_Phone
+	SELECT TOP 1 WITH TIES c.Customer_Name, b.Bill_ID, b.Final_Price
 	FROM Customer c
 		JOIN Bill b ON c.Customer_Phone = b.Customer_Phone
 	WHERE MONTH(b.Create_Date) = 6
-	ORDER BY b.Primary_Price DESC;
+	ORDER BY b.Final_Price DESC;
 
 -- Câu 8:
 -- - Hiển thị thông tin sản phẩm có số lượng mua nhiều nhất của các khách hàng vãng lai
