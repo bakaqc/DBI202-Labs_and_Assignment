@@ -46,6 +46,7 @@ GROUP BY    YEAR(b.Create_Date),
 
 -- Câu 7:
 -- - Hiển thị khách hàng thành viên có hóa đơn mua lớn nhất trong tháng 6 và thông tin hóa đơn đó
+-- - Thông tin hóa đơn cần hiển thị: mã hóa đơn, số tiền khách đã chi trả
 -- - Thúy
 
 -- Câu 8:
