@@ -634,3 +634,24 @@ EXEC Pay 'BILL000027', 500000
 EXEC Pay 'BILL000028', 350000
 EXEC Pay 'BILL000029', 720000
 EXEC Pay 'BILL000030', 315000
+
+
+
+-- C2: Hiển thị lịch sử mua hàng của khách hàng thành viên có SDT 0956789012
+SELECT B.Bill_ID, B.Create_Date, B.Create_Time, P.Product_Name, BD.Product_Amount, B.Final_Price
+FROM Bill B
+JOIN Customer C ON B.Customer_Phone = C.Customer_Phone
+JOIN Bill_Data BD ON B.Bill_ID = BD.Bill_ID
+JOIN Product P ON BD.Product_ID = P.Product_ID
+WHERE C.Customer_Phone = '0956789012'
+ORDER BY B.Bill_ID ASC
+
+
+-- C8: Hiển thị thông tin của sản phẩm có số lượng mua nhiều nhất của khách hàng vãng lai
+SELECT TOP 1 WITH TIES P.Product_ID, P.Product_Name, COUNT(BD.Product_ID) AS The_number_of_products
+FROM Product P
+JOIN Bill_Data BD ON P.Product_ID = BD.Product_ID
+JOIN Bill BL ON BD.Bill_ID = BL.Bill_ID
+WHERE BL.Customer_Phone IS NOT NULL
+GROUP BY P.Product_ID, P.Product_Name
+ORDER BY The_number_of_products DESC
