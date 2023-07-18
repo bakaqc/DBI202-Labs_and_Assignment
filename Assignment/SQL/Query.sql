@@ -51,4 +51,5 @@ GROUP BY    YEAR(b.Create_Date),
 
 -- Câu 8:
 -- - Hiển thị thông tin sản phẩm có số lượng mua nhiều nhất của các khách hàng vãng lai
+-- - Thông tin sản phẩm cần hiển thị: Tên sản phẩn, giá sản phẩm, số lượng đã bán ra
 -- - Chương
