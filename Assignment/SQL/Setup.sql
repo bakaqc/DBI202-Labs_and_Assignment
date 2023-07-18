@@ -308,16 +308,16 @@ GO
 -- Format: PD001, PD002, PD003,...
 INSERT INTO Product (Product_ID, Product_Name, Price)
 VALUES
-('PD001',	N'Bánh macaron',				25000),
-('PD002',	N'Bánh tiramisu',				35000),
-('PD003',	N'Bánh mousse socola',			30000),
+('PD001',	N'Bánh macaron',				35000),
+('PD002',	N'Bánh tiramisu',				60000),
+('PD003',	N'Bánh mousse socola',			65000),
 ('PD004',	N'Bánh red velvet',				40000),
-('PD005',	N'Bánh cupcake',				20000),
-('PD006',	N'Bánh bông lan trứng muối',	15000),
-('PD007',	N'Bánh cheesecake',				50000),
-('PD008',	N'Bánh tart trái cây',			45000),
-('PD009',	N'Bánh cookie socola',			10000),
-('PD010',	N'Bánh hạnh nhân caramel',		10000)
+('PD005',	N'Bánh cupcake',				25000),
+('PD006',	N'Bánh bông lan trứng muối',	75000),
+('PD007',	N'Bánh cheesecake',				55000),
+('PD008',	N'Bánh tart trái cây',			90000),
+('PD009',	N'Bánh cookie socola',			110000),
+('PD010',	N'Bánh hạnh nhân caramel',		45000)
 GO
 
 
